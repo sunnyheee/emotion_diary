@@ -10,21 +10,23 @@ const Edit = () => {
   return (
     <div>
       <h1>Edit</h1>
-      <p>이곳은 Edit 입니다.</p>
-      <button onClick={() => setSearchParams({ who: "park" })}>QS바꾸기</button>
+      <p>こちらは Edit です。</p>
+      <button onClick={() => setSearchParams({ who: "park" })}>
+        QS Change
+      </button>
       <button
         onClick={() => {
           navigate("/home");
         }}
       >
-        Home으로가기
+        Home
       </button>
       <button
         onClick={() => {
           navigate(-1);
         }}
       >
-        뒤로가기
+        Back
       </button>
     </div>
   );
