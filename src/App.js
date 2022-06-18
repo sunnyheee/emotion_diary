@@ -12,10 +12,10 @@ function App() {
       <div className="App">
         <h2>App.js</h2>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/New" element={<New />} />
-          <Route path="/Edit" element={<Edit />} />
-          <Route path="/Diary" element={<Diary />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/new" element={<New />} />
+          <Route path="/edit" element={<Edit />} />
+          <Route path="/diary/:id" element={<Diary />} />
         </Routes>
       </div>
     </BrowserRouter>
