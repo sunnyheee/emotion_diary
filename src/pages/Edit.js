@@ -1,33 +1,31 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { DiaryStateContext } from "../App";
+import DiaryEditor from "../components/DiaryEditor";
 
 const Edit = () => {
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [originData, setOriginData] = useState();
+  const { id } = useParams();
 
-  const id = searchParams.get("id");
+  const diaryList = useContext(DiaryStateContext);
 
-  const mode = searchParams.get("mode");
+  useEffect(() => {
+    if (diaryList.length >= 1) {
+      const targetDiary = diaryList.find(
+        (item) => parseInt(item.id) === parseInt(id)
+      );
+      if (targetDiary) {
+        setOriginData(targetDiary);
+      } else {
+        navigate("/", { replace: true });
+      }
+    }
+  }, [id, diaryList]);
+
   return (
     <div>
-      <h1>Edit</h1>
-      <p>こちらは Edit です。</p>
-      <button onClick={() => setSearchParams({ who: "park" })}>
-        QS Change
-      </button>
-      <button
-        onClick={() => {
-          navigate("/home");
-        }}
-      >
-        Home
-      </button>
-      <button
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        Back
-      </button>
+      {originData && <DiaryEditor isEdit={true} originData={originData} />}
     </div>
   );
 };

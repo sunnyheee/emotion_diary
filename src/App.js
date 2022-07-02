@@ -37,9 +37,16 @@ const reducer = (state, action) => {
 export const DiaryStateContext = React.createContext();
 export const DiaryDispatchContext = React.createContext();
 
+const dummyData = [
+  { id: 1, emotion: 1, content: "1", date: 1656728245014 },
+  { id: 2, emotion: 2, content: "2", date: 1656728245014 },
+];
+
 function App() {
-  const [data, dispatch] = useReducer(reducer, []);
+  const [data, dispatch] = useReducer(reducer, dummyData);
   const dataId = useRef(0);
+
+  console.log(new Date().getTime());
   //CREATE
   const onCreate = (date, content, emotion) => {
     dispatch({
@@ -78,7 +85,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/new" element={<New />} />
-              <Route path="/edit" element={<Edit />} />
+              <Route path="/edit/:id" element={<Edit />} />
               <Route path="/diary/:id" element={<Diary />} />
             </Routes>
           </div>
