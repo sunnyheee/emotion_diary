@@ -1,4 +1,10 @@
-const ControlMenu = ({ value, onChange, optionList }) => {
+import React from "react";
+import { useEffect } from "react";
+
+const ControlMenu = React.memo(({ value, onChange, optionList }) => {
+  useEffect(() => {
+    console.log("AAA");
+  }, []);
   return (
     <select
       className="ControlMenu"
@@ -12,5 +18,5 @@ const ControlMenu = ({ value, onChange, optionList }) => {
       ))}
     </select>
   );
-};
+});
 export default ControlMenu;

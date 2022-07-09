@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DiaryDispatchContext } from "../App";
 import EmotionItem from "./EmotionItem";
@@ -16,11 +16,11 @@ const DiaryEditor = ({ isEdit, originData }) => {
   const [emotion, setEmotion] = useState(3);
   const [content, setContent] = useState("");
 
-  const { onCreate, onEdit } = useContext(DiaryDispatchContext);
+  const { onCreate, onEdit, onRemove } = useContext(DiaryDispatchContext);
 
-  const handleClickEmote = (emotion) => {
+  const handleClickEmote = useCallback((emotion) => {
     setEmotion(emotion);
-  };
+  }, []);
 
   const handleSubmit = () => {
     if (content.length < 1) {
@@ -46,11 +46,23 @@ const DiaryEditor = ({ isEdit, originData }) => {
       setContent(originData.content);
     }
   }, []);
+
+  const handleRemove = () => {
+    if (window.confirm("本当に削除しますか？")) {
+      onRemove(originData.id);
+      navigate("/", { replace: true });
+    }
+  };
   return (
     <div className="DiaryEditor">
       <MyHeader
         headText={isEdit ? "日記修正" : "日記作成"}
         leftChild={<MyButton text={"< Back"} onClick={() => navigate(-1)} />}
+        rightChild={
+          isEdit && (
+            <MyButton text={"削除"} type={"nagative"} onClick={handleRemove} />
+          )
+        }
       />
       <div>
         <section>
