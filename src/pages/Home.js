@@ -12,6 +12,11 @@ const Home = () => {
   const headText = `${curDate.getFullYear()}年 ${curDate.getMonth() + 1}月`;
 
   useEffect(() => {
+    const titleElement = document.getElementsByTagName("title")[0];
+    titleElement.innerHTML = `Emotion diary`;
+  }, []);
+
+  useEffect(() => {
     const firstDay = new Date(
       curDate.getFullYear(),
       curDate.getMonth(),
